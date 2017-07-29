@@ -86,6 +86,21 @@ setcookie("cookie[searchType3]", "", time()-3600);
 		<a href=<?php $contactURL=BASE_URL . "contact.php"; echo $contactURL;?>>Contact</a>
 	</div>-->
 	
+	<?php $question_hover_str = "<p style='font-family: Arial; font-weight: bold;'>Search:</p>
+								 <ol style='font-family: Georgia; font-size: 10pt;'>
+								 <li>Select entity type from pulldown menu: Gene, TF, or Term.</li>
+								 <li>Enter gene/TF  symbol or any keyword.</li>
+								 <li>Click 'Tremel Search' to submit.</li>
+								 <li>Click [+/-] to add additional search fields.</li>
+								 </ol>
+								 <p style='font-family: Arial; font-weight: bold;'>Visualization:</p>
+								 <ol style='font-family: Georgia; font-size: 10pt;'>
+								 <li>Click on <span style='color:blue; font-weight: bold;'>blue</span> point in the plot to display the terms, genes and TFs associated with that module.</li>
+								 <li>The selected dot is displayed in <span style='color:red; font-weight: bold;'>red</span>.Other dots are colored based on the similarity to the selected module.</li>
+								 <li>Rotate the plot by left-click and dragging the mouse.</li>
+								 <li>Customize the plot using right-click menu options.</li>
+								 </ol>"; ?>
+	
 	<div id="searchbar">
         <form action="query.php" method="post" accept-charset="UTF-8">
 		<table border = "0" id="searchbar_table">
@@ -131,19 +146,65 @@ setcookie("cookie[searchType3]", "", time()-3600);
 					<h3 class="modal-title">Tremel Help</h3>
 				</div>
 				<div class="modal-body">
-					<p style="font-family: Arial; font-weight: bold;">Search:</p>
-					<ol style="font-family: Georgia; font-size: 10pt;">
+					<p style="font-family: Arial; font-weight: bold;">Search Box(es)</p>
+					<p style="font-family: Georgia; font-size: 10pt;">
+					The user can query TREMEL with either genes, TFs or terms,
+					or a combination of up to 3 entities of any type. The entity
+					type can be selected from the drop down list to the right of
+					each search box. Clicking the "+" button to the left of the
+					first search box opens an additional search box. A maximum of
+					3 search boxes are allowed. The genes and TFs field need to be
+					the official symbols designated by NCBI. The term query can be
+					any single term and is case insensitive. The output of the tool
+					consists of two panels.</p>
+					<!--<ol style="font-family: Georgia; font-size: 10pt;">
 						<li>Select entity type from pulldown menu: Gene, TF, or Term.</li>
 						<li>Enter gene/TF  symbol or any keyword.</li>
 						<li>Click 'Tremel Search' to submit.</li>
 						<li>Click [+/-] to add additional search fields.</li>
-					</ol>
-					<p style="font-family: Arial; font-weight: bold;">Visualization:</p>
-					<ol style="font-family: Georgia; font-size: 10pt;">
+					</ol>-->
+					<p style="font-family: Arial; font-weight: bold;">Top Panel: 3-D interactive plot</p>
+					<p style="font-family: Georgia; font-size: 10pt;">
+					The top panel is comprised of a 3-dimensional interactive plot
+					that shows all ATMs containing the search box entities, as points.
+					The axes of the plot correspond to the NTF approximation rank k,
+					the ATM #, and the rank of the queried entity (first search box only)
+					in the ATMs. An ATM can be selected in the panel by clicking on its
+					corresponding point in the 3-D plot. The color of the selected point
+					changes to red and the colors of the remaining points corresponding
+					to all other ATMs are depicted in terms of similarity to the selected
+					ATM. The most similar ATMs are colored in shades of red while the least
+					similar ones are colored in shades of blue. The similarity between any 
+					two ATMs is calculated as the Jaccard coefficient between the sets of
+					genes and TFs in the respective ATMs.</p>
+					<!--<ol style="font-family: Georgia; font-size: 10pt;">
 						<li>Click on <span style="color:blue; font-weight: bold;">blue</span> point in the plot to display the terms, genes and TFs associated with that module.</li>
 						<li>The selected dot is displayed in <span style="color:red; font-weight: bold;">red</span>. Other dots are colored based on the similarity to the selected module.</li>
 						<li>Rotate the plot by left-click and dragging the mouse.</li>
 						<li>Customize the plot using right-click menu options.</li>
+					</ol>-->
+					<p style="font-family: Arial; font-weight: bold;">Bottom Panel: ATM contents</p>
+					<p style="font-family: Georgia; font-size: 10pt;">
+					The bottom panel contains several sub-panels, each corresponding to an ATM
+					point in the first panel. The top sub-panel corresponds to the selected ATM,
+					and the remaining ATMs are ordered according to their similarity to the
+					selected ATM. Each sub-panel displays the ranked genes, TFs and terms of
+					the corresponding ATM, as well as the enriched GO and KEGG categories.
+					Clicking a sub-panel expands it to display its contents, and closes the
+					previously open sub-panel. The contents of only one sub-panel are viewable at a time.</p>
+					<p style='font-family: Arial; font-weight: bold;'>Search:</p>
+					<ol style='font-family: Georgia; font-size: 10pt;'>
+					<li>Select entity type from pulldown menu: Gene, TF, or Term.</li>
+					<li>Enter gene/TF  symbol or any keyword.</li>
+					<li>Click 'Tremel Search' to submit.</li>
+					<li>Click [+/-] to add additional search fields.</li>
+					</ol>
+					<p style='font-family: Arial; font-weight: bold;'>Visualization:</p>
+					<ol style='font-family: Georgia; font-size: 10pt;'>
+					<li>Click on <span style='color:blue; font-weight: bold;'>blue</span> point in the plot to display the terms, genes and TFs associated with that module.</li>
+					<li>The selected dot is displayed in <span style='color:red; font-weight: bold;'>red</span>.Other dots are colored based on the similarity to the selected module.</li>
+					<li>Rotate the plot by left-click and dragging the mouse.</li>
+					<li>Customize the plot using right-click menu options.</li>
 					</ol>
 				</div>
 				<div class="modal-footer">
