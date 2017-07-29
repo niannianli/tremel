@@ -3,7 +3,6 @@ include_once("constants.php");
 
 //
 // Clear up all cookies
-//
 setcookie("cookie[keyword1]",    "", time()-3600);
 setcookie("cookie[searchType1]", "", time()-3600);
 setcookie("cookie[keyword2]",    "", time()-3600);
@@ -14,13 +13,14 @@ setcookie("cookie[searchType3]", "", time()-3600);
 <html>
 <head>
 	<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link href="./style.css" rel="stylesheet" type="text/css" media="screen"/>
-	<link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="./lib/jquery-1.9.1.js"></script>
 	<script src="./lib/jquery-ui.js"></script>
 	<link href="./img/paw.gif" rel="SHORTCUT ICON"/>
-	<title>TREMEL</title>
+	<title>TREMEL: Transcription REgulatory Modules Extracted from Literature</title>
 	<script>$(document).ready(function(){$("input").blur(function(){;});});</script>
 	<script>$(document).ready(function()
 	{
@@ -35,7 +35,6 @@ setcookie("cookie[searchType3]", "", time()-3600);
 			// if only entity 1 is shown
 			if(n == 1)
 			{
-				$(".submit").fadeOut(-1000);
 				$(".panel2").fadeIn(1000);// show entity 2
 				$(".submit").fadeIn(1000);
 				n = 2; // now there are entity 1 and entity 2
@@ -43,7 +42,6 @@ setcookie("cookie[searchType3]", "", time()-3600);
 			// if entity 1 and entity 2 are shown
 			else if(n == 2)
 			{
-				$(".submit").fadeOut(-1000);
 				$(".panel3").fadeIn(1000); // shown entity 3
 				$(".submit").fadeIn(1000);
 				n = 3; // now there are 3
@@ -51,12 +49,11 @@ setcookie("cookie[searchType3]", "", time()-3600);
 				// change the icon to be the hide icon
 				var imgNameIndex = add.src.lastIndexOf("/") + 1;
 				var imgName = add.src.substr(imgNameIndex);
-				add.src="./img/hide.gif";
+				add.src="./img/minus.png";
 			}
 			// if there are three, only can hide
 			else if (n == 3)
 			{
-				$(".submit").fadeOut();
 				$(".panel2").fadeOut(500);
 				$(".panel3").fadeOut(500);
 				$(".submit").fadeIn(1000);
@@ -64,88 +61,112 @@ setcookie("cookie[searchType3]", "", time()-3600);
 				// the show icon should be displayed
 				var imgNameIndex = add.src.lastIndexOf("/") + 1;
 				var imgName = add.src.substr(imgNameIndex);
-				add.src="./img/show.gif";
+				add.src="./img/add.png";
 			}
 		});
 	});
     </script>
 </head>
 <body>
+	<div style="height: 1em;"></div>
 	<div id="tremelhdr">
-		<div style="padding: 0 0 10 0">
-		<a href=<?php $baseURL=BASE_URL; echo $baseURL;?> style="height: auto; float:right; margin-top: 5;">
-			<img style="margin-left: 15; margin-right: 15;" src="./img/UMLogo280.gif" width="300" height="70" border="0px"></a>
-		<span><a href=<?php $baseURL=BASE_URL; echo $baseURL;?>><img style="margin-top: 5; margin-bottom: 3;" src="./img/tremel_logo_CourierNew.gif" width="177" height="33" border="0px"></a><br>
-			<span id="fontselect">
-				Transcription
-					  REgulatory
-					  Modules 
-					  Extracted from
-					  Literature
-					  <!--<b class="cap">(TREMEL)</b>-->
-			</span>
-		</span>
-		</div>
-		<!--<div id="div_line" style="height: 2;"></div>-->
-		<div style="margin-top: 20; margin-bottom: 20;">
-		<ul>
-			<li>Click [<b>+</b>/<b>-</b>] button below to show/hide multiple search keywords.</li>
-			<li>Chrome/Firefox are recommended.</li>
-		</ul>
-		</div>
-		
-		<div id="search">
+		<a href="http://www.memphis.edu/" style="float:right;">
+			<img src="./img/UMLogo280.gif" width="150" height="45" border="0px"></a>
+		<a href=<?php $baseURL=BASE_URL; echo $baseURL;?>>
+			<img src="./img/tremel_logo_CourierNew.gif" width="200" height="45" border="0px"></a>
+			<br>
+			<span id="tremelhdr_font">Transcription REgulatory Modules Extracted from Literature</span>
+	</div>
+	
+	<!--<div id="navbar">
+		<a href=<?php $homeURL=BASE_URL . "index.php"; echo $homeURL;?>>Home</a>
+		<a href=<?php $aboutURL=BASE_URL . "about.php"; echo $aboutURL;?>>About</a>
+		<a href=<?php $docURL=BASE_URL . "doc.php"; echo $docURL;?>>Documentation</a>
+		<a href=<?php $helpURL=BASE_URL . "help.php"; echo $helpURL;?>>Help/FAQ</a>
+		<a href=<?php $contactURL=BASE_URL . "contact.php"; echo $contactURL;?>>Contact</a>
+	</div>-->
+	
+	<div id="searchbar">
         <form action="query.php" method="post" accept-charset="UTF-8">
-		<table style="margin-top: 5; float:center; padding: 0em 0em 0em 2em; -webkit-text-shadow: 1px 1px 2px rgba(0,0,0,0.2);-moz-text-shadow: 1px 1px 2px rgba(0,0,0,0.2);text-shadow: 1px 1px 2px rgba(0,0,0,0.2);  color: black;">
-		<tr><td><span style="margin-left: -13; margin-top: 20;"><img src="./img/show.gif" id="add" class="flip" style="cursor:pointer;"  width="16" height="15"/></span>
-	       Entity 1: 
-				<input type="text" name="keyword1" value=""/>
-				<select name="searchType1">
+		<table border = "0" id="searchbar_table">
+			<tr><td id="td_add_hide"><img src="./img/add.png" id="add" class="flip" style="cursor:pointer;"  width="25" height="25" data-toggle="tooltip" data-placement="bottom" title="Click [+/-] button to show/hide multiple search fields"/></td>
+				<td id="td_search_input">
+				Entity 1:
+					<input class="input_text" type="text" name="keyword1" value="" data-toggle="tooltip" data-placement="bottom" title="Enter official Gene Symbol or keyword"/>
+					<select name="searchType1" data-toggle="tooltip" data-placement="bottom" title="Select entity type: Gene, TF or term">
+						<option value="gene">Gene</option>
+						<option value="TF">TF</option>
+						<option value="term">Term</option>
+					</select></td>
+				<td><input class="submit" type="submit" name="op" value="Tremel Search" data-toggle="tooltip" data-placement="bottom" title="Click to submit query"/></td>
+				<td id="td_help_hover"><img src="./img/question.png" width="25" height="25" data-toggle="modal" data-target="#myModal" data-toggle="tooltip" data-placement="bottom" title="display help information"/></td></tr>
+					
+		<tr><td class="panel2"></td><td id="td_search_input" class="panel2">
+	       Entity 2: <input class="input_text" type="text" name="keyword2" value="" data-toggle="tooltip" data-placement="bottom" title="Enter official Gene Symbol or keyword"/>
+			    <select name="searchType2" data-toggle="tooltip" data-placement="bottom" title="Select entity type: Gene, TF or term">
 		        <option value="gene">Gene</option>
 		        <option value="TF">TF</option>
 				<option value="term">Term</option>
 		        </select>
-				</td>
-				<td rowspan="3">
-		        <input class="submit" type="submit" name="op" value="TREMEL SEARCH"/>
-				</td></tr>
-		<tr><td class="panel2">
-	       &nbsp;
-	       Entity 2: <input type="text" name="keyword2" value=""/>
-			    <select name="searchType2">
+		 </td><td class="panel2"></td></tr>
+		 <tr><td class="panel3"></td><td id="td_search_input" class="panel3">
+	       Entity 3: <input class="input_text" type="text" name="keyword3" value="" data-toggle="tooltip" data-placement="bottom" title="Enter official Gene Symbol or keyword"/>
+			    <select name="searchType3" data-toggle="tooltip" data-placement="bottom" title="Select entity type: Gene, TF or term">
 		        <option value="gene">Gene</option>
 		        <option value="TF">TF</option>
 				<option value="term">Term</option>
 		        </select>
-		 </td></tr>
-		 <tr><td class="panel3">
-	       &nbsp;
-	       Entity 3: <input type="text" name="keyword3" value=""/>
-			    <select name="searchType3">
-		        <option value="gene">Gene</option>
-		        <option value="TF">TF</option>
-				<option value="term">Term</option>
-		        </select>
-		 </td></tr>
+		 </td><td class="panel3"></td></tr>
 		</table>
 	    </form>
-        </div>
-		<div style="height: 1; margin-top:-5;"></div><!-- make some space to look good -->
+    </div>
+	
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h3 class="modal-title">Tremel Help</h3>
+				</div>
+				<div class="modal-body">
+					<p style="font-family: Arial; font-weight: bold;">Search:</p>
+					<ol style="font-family: Georgia; font-size: 10pt;">
+						<li>Select entity type from pulldown menu: Gene, TF, or Term.</li>
+						<li>Enter gene/TF  symbol or any keyword.</li>
+						<li>Click 'Tremel Search' to submit.</li>
+						<li>Click [+/-] to add additional search fields.</li>
+					</ol>
+					<p style="font-family: Arial; font-weight: bold;">Visualization:</p>
+					<ol style="font-family: Georgia; font-size: 10pt;">
+						<li>Click on <span style="color:blue; font-weight: bold;">blue</span> point in the plot to display the terms, genes and TFs associated with that module.</li>
+						<li>The selected dot is displayed in <span style="color:red; font-weight: bold;">red</span>. Other dots are colored based on the similarity to the selected module.</li>
+						<li>Rotate the plot by left-click and dragging the mouse.</li>
+						<li>Customize the plot using right-click menu options.</li>
+					</ol>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
 	</div>
+	
+	<div id="div_line" style="height: 1;"></div>
 	
 	<div id="content" class="firstpage">
-		
 	</div>
 	
-	<div id="div_line" style="height: 2;"></div>
+	<div id="div_line" style="height: 1;"></div>
 	<div class="footer"
-		style="font-family: Open Sans, Lato, Courier New;
-		font-size: 10pt;
+		style="font-family: Arial, Open Sans, Lato, Courier New;
+		font-size: 9pt;
 		text-align: center;">
-			Designed by Daqing Yun &copy; 2014 &middot;
+			All Rights Reserved &copy; 2014-2017 &middot;
 			<a href="http://www.memphis.edu/binf/">Bioinformatics</a> &middot;
 			<a href="http://www.memphis.edu/">University of Memphis</a> &middot;
-			<a href="mailto:rhomayon@memphis.edu;sujoyroy@memphis.edu;dyun@memphis.edu;">Contact</a>
+			<a href="mailto:rhomayon@memphis.edu;sujoyroy@memphis.edu;daqingyun@gmail.com;">Contact</a>
 	</div>
 </body>
 </html>

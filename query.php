@@ -110,6 +110,7 @@ if($_POST['keyword1'])
 	// Set cookies
 	setcookie("cookie[keyword1]", $key1);
 	setcookie("cookie[searchType1]", $type1);
+	setcookie("cookie[queryNum]", $query_num);
 	
 	// Clear others
 	$key2 = "";
@@ -130,6 +131,7 @@ if ($_POST['keyword2'])
 	// Set cookies
 	setcookie("cookie[keyword2]", $key2);
 	setcookie("cookie[searchType2]", $type2);
+	setcookie("cookie[queryNum]", $query_num);
 	
 	// Clear others
 	$key3 = "";
@@ -143,6 +145,7 @@ if ($_POST['keyword3'])
     // Get the info
 	$key3 = PorterStemmer::Stem($_POST['keyword3']);
 	$type3 = $_POST['searchType3'];
+	setcookie("cookie[queryNum]", $query_num);
 	
 	// Set cookies
 	setcookie("cookie[keyword3]", $key3);
@@ -167,6 +170,8 @@ if(!$_POST['keyword1'] && !$_POST['keyword2'] && !$_POST['keyword3'])
 		
 		$key3 = $_COOKIE['cookie']['keyword3'];
 		$type3 = $_COOKIE['cookie']['searchType3'];
+		
+		$query_num = $_COOKIE['cookie']['queryNum'];
 	}
 	else{
 		// Do nothing, the results will be empty.
@@ -315,16 +320,16 @@ $go2_pgstr = get_go2_pgstr($selectid, $num_pages, $curr_pageid);
 <html>
   <head>
 	<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link href="./style.css" rel="stylesheet" type="text/css" media="screen"/>
-	<link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="./lib/jquery-ui.css">
-	<script src="./lib/jquery-1.9.1.js"></script>
+	<!--<script src="./lib/jquery-1.9.1.js"></script>-->
 	<script src="./lib/jquery-ui.js"></script>
 	<script src="./lib/canvasXpress.hacked.min.js"></script>
-	<link href="./img/paw.gif" rel="ICON"/>
-	<title>TREMEL</title>
+	<!--<link href="./img/paw.gif" rel="ICON"/>-->
+	<title>TREMEL: Transcription REgulatory Modules Extracted from Literature</title>
 	<script>$(function(){$( "#expandList" ).accordion({heightStyle: "content"});});</script>
 	<script>$(document).ready(function(){$("input").blur(function(){;});});</script>		
 	<script>$(document).ready(function()
@@ -340,7 +345,6 @@ $go2_pgstr = get_go2_pgstr($selectid, $num_pages, $curr_pageid);
 			// if only entity 1 is shown
 			if(n == 1)
 			{
-				$(".submit").fadeOut(-1000);
 				$(".panel2").fadeIn(1000);// show entity 2
 				$(".submit").fadeIn(1000);
 				n = 2; // now there are entity 1 and entity 2
@@ -348,7 +352,6 @@ $go2_pgstr = get_go2_pgstr($selectid, $num_pages, $curr_pageid);
 			// if entity 1 and entity 2 are shown
 			else if(n == 2)
 			{
-				$(".submit").fadeOut(-1000);
 				$(".panel3").fadeIn(1000); // shown entity 3
 				$(".submit").fadeIn(1000);
 				n = 3; // now there are 3
@@ -356,12 +359,11 @@ $go2_pgstr = get_go2_pgstr($selectid, $num_pages, $curr_pageid);
 				// change the icon to be the hide icon
 				var imgNameIndex = add.src.lastIndexOf("/") + 1;
 				var imgName = add.src.substr(imgNameIndex);
-				add.src="./img/hide.gif";
+				add.src="./img/minus.png";
 			}
 			// if there are three, only can hide
 			else if (n == 3)
 			{
-				$(".submit").fadeOut();
 				$(".panel2").fadeOut(500);
 				$(".panel3").fadeOut(500);
 				$(".submit").fadeIn(1000);
@@ -369,7 +371,7 @@ $go2_pgstr = get_go2_pgstr($selectid, $num_pages, $curr_pageid);
 				// the show icon should be displayed
 				var imgNameIndex = add.src.lastIndexOf("/") + 1;
 				var imgName = add.src.substr(imgNameIndex);
-				add.src="./img/show.gif";
+				add.src="./img/add.png";
 			}
 		});
 	});
@@ -378,7 +380,7 @@ $go2_pgstr = get_go2_pgstr($selectid, $num_pages, $curr_pageid);
 		var showScat3DCht = function (){
 			var num = <?php echo $num_records ?>;
 			if(num <= 0){
-				document.getElementById('ErrorMessage').innerHTML='No records found based on the provided information.';
+				document.getElementById('errmsg').innerHTML='No records found based on the provided information.';
 				return;
 			}
 			var pp = <?php echo $pageid; ?>;
@@ -407,100 +409,111 @@ $go2_pgstr = get_go2_pgstr($selectid, $num_pages, $curr_pageid);
 	</script>
 </head>
   
-  <body onload="showScat3DCht();">
-    <div id="tremelhdr">
-		<div style="padding: 0 0 10 0">
-		<a href=<?php $baseURL=BASE_URL; echo $baseURL;?> style="height: auto; float:right; margin-top: 5;">
-			<img style="margin-left: 15; margin-right: 15;" src="./img/UMLogo280.gif" width="300" height="70" border="0px"></a>
-		<span><a href=<?php $baseURL=BASE_URL; echo $baseURL;?>>
-			<img style="margin-top: 5; margin-bottom: 3;" src="./img/tremel_logo_CourierNew.gif" width="177" height="33" border="0px"></a><br>
-			<span id="fontselect">
-				Transcription
-					  REgulatory
-					  Modules 
-					  Extracted from
-					  Literature
-					  <!--<b class="cap">(TREMEL)</b>-->
-			</span>
-		</span>
-		</div>
-		<!--<div id="div_line" style="height: 2;"></div>-->
-		<div style="margin-top: 20; margin-bottom: 20">
-		<ul>
-			<li>Click [<b>+</b>/<b>-</b>] button below to show/hide multiple search keywords.</li>
-			<li>Chrome/Firefox are recommended.</li>
-		</ul>
-		</div>
-		
-		<div id="search">
+<body onload="showScat3DCht();">
+	<div style="height: 1em;"></div>
+	<div id="tremelhdr">
+		<a href="http://www.memphis.edu/" style="float:right;">
+			<img src="./img/UMLogo280.gif" width="150" height="45" border="0px"></a>
+		<a href=<?php $baseURL=BASE_URL; echo $baseURL;?>>
+			<img src="./img/tremel_logo_CourierNew.gif" width="200" height="45" border="0px"></a>
+			<br>
+			<span id="tremelhdr_font">Transcription REgulatory Modules Extracted from Literature</span>
+	</div>
+	
+	<!--<div id="navbar">
+		<a href=<?php $homeURL=BASE_URL . "index.php"; echo $homeURL;?>>Home</a>
+		<a href=<?php $aboutURL=BASE_URL . "about.php"; echo $aboutURL;?>>About</a>
+		<a href=<?php $docURL=BASE_URL . "doc.php"; echo $docURL;?>>Documentation</a>
+		<a href=<?php $helpURL=BASE_URL . "help.php"; echo $helpURL;?>>Help/FAQ</a>
+		<a href=<?php $contactURL=BASE_URL . "contact.php"; echo $contactURL;?>>Contact</a>
+	</div>-->
+	
+	<div id="searchbar">
         <form action="query.php" method="post" accept-charset="UTF-8">
-		<table style="margin-top: 5; float:center; padding: 0em 0em 0em 2em; -webkit-text-shadow: 1px 1px 2px rgba(0,0,0,0.2);-moz-text-shadow: 1px 1px 2px rgba(0,0,0,0.2);text-shadow: 1px 1px 2px rgba(0,0,0,0.2);  color: black;">
-		<tr><td><span style="margin-left: -13; margin-top: 20;"><img src="./img/show.gif" id="add" class="flip" style="cursor:pointer;"  width="16" height="15"/></span>
-	       Entity 1: 
-				<input type="text" name="keyword1" value=""/>
-				<select name="searchType1">
+		<table border = "0" id="searchbar_table">
+			<tr><td id="td_add_hide"><img src="./img/add.png" id="add" class="flip" style="cursor:pointer;"  width="25" height="25" data-toggle="tooltip" data-placement="bottom" title="Click [+/-] button to show/hide multiple search fields"/></td>
+				<td id="td_search_input">
+				Entity 1:
+					<input class="input_text" type="text" name="keyword1" value="" data-toggle="tooltip" data-placement="bottom" title="Enter official Gene Symbol or keyword"/>
+					<select name="searchType1" data-toggle="tooltip" data-placement="bottom" title="Select entity type: Gene, TF or term">
+						<option value="gene">Gene</option>
+						<option value="TF">TF</option>
+						<option value="term">Term</option>
+					</select></td>
+				<td><input class="submit" type="submit" name="op" value="Tremel Search" data-toggle="tooltip" data-placement="bottom" title="Click to submit query"/></td>
+				<td id="td_help_hover"><img src="./img/question.png" width="25" height="25" data-toggle="modal" data-target="#myModal" data-toggle="tooltip" data-placement="bottom" title="display help information"/></td></tr>
+					
+		<tr><td class="panel2"></td><td id="td_search_input" class="panel2">
+	       Entity 2: <input class="input_text" type="text" name="keyword2" value="" data-toggle="tooltip" data-placement="bottom" title="Enter official Gene Symbol or keyword"/>
+			    <select name="searchType2" data-toggle="tooltip" data-placement="bottom" title="Select entity type: Gene, TF or term">
 		        <option value="gene">Gene</option>
 		        <option value="TF">TF</option>
 				<option value="term">Term</option>
 		        </select>
-				</td>
-				<td rowspan="3">
-		        <input class="submit" type="submit" name="op" value="TREMEL SEARCH"/>
-				</td></tr>
-		<tr><td class="panel2">
-	       &nbsp;
-	       Entity 2: <input type="text" name="keyword2" value=""/>
-			    <select name="searchType2">
+		 </td><td class="panel2"></td></tr>
+		 <tr><td class="panel3"></td><td id="td_search_input" class="panel3">
+	       Entity 3: <input class="input_text" type="text" name="keyword3" value="" data-toggle="tooltip" data-placement="bottom" title="Enter official Gene Symbol or keyword"/>
+			    <select name="searchType3" data-toggle="tooltip" data-placement="bottom" title="Select entity type: Gene, TF or term">
 		        <option value="gene">Gene</option>
 		        <option value="TF">TF</option>
 				<option value="term">Term</option>
 		        </select>
-		 </td></tr>
-		 <tr><td class="panel3">
-	       &nbsp;
-	       Entity 3: <input type="text" name="keyword3" value=""/>
-			    <select name="searchType3">
-		        <option value="gene">Gene</option>
-		        <option value="TF">TF</option>
-				<option value="term">Term</option>
-		        </select>
-		 </td></tr>
+		 </td><td class="panel3"></td></tr>
 		</table>
 	    </form>
-        </div>
-		<div style="height: 1; margin-top:-5;"></div><!-- make some space to look good -->
+    </div>
+	
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h3 class="modal-title">Tremel Help</h3>
+				</div>
+				<div class="modal-body">
+					<p style="font-family: Arial; font-weight: bold;">Search:</p>
+					<ol style="font-family: Georgia; font-size: 10pt;">
+						<li>Select entity type from pulldown menu: Gene, TF, or Term.</li>
+						<li>Enter gene/TF  symbol or any keyword.</li>
+						<li>Click 'Tremel Search' to submit.</li>
+						<li>Click [+/-] to add additional search fields.</li>
+					</ol>
+					<p style="font-family: Arial; font-weight: bold;">Visualization:</p>
+					<ol style="font-family: Georgia; font-size: 10pt;">
+						<li>Click on <span style="color:blue; font-weight: bold;">blue</span> point in the plot to display the terms, genes and TFs associated with that module.</li>
+						<li>The selected dot is displayed in <span style="color:red; font-weight: bold;">red</span>. Other dots are colored based on the similarity to the selected module.</li>
+						<li>Rotate the plot by left-click and dragging the mouse.</li>
+						<li>Customize the plot using right-click menu options.</li>
+					</ol>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
 	</div>
 	
-	<div id="ErrorMessage"
-		style="font-family: 'Lato', Times;
-			   text-align: center;
-			   color: black;
-			   -webkit-text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-			   -moz-text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-			   text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-			   color: black;">
-	</div>
+	<div id="div_line" style="height: 1;"></div>
 	
-    <div style="font-family: 'Lato', Times;
-			    text-align: center;
-			    color: black;
-			    -webkit-text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-			    -moz-text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-			    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">
+    <div id="hint">
             Total <?php echo "<b>".$num_records."</b>"; ?> results.
             Search Query:  <?php echo "<b>" . $key1 ."</b> {". $type1 . "}"; ?>
 			<?php
-				if($queryNum == 2){
+				if($query_num == 2){
 					echo " AND <b>" . $key2 . "</b> {" . $type2 ."}";
 				}
-				elseif($queryNum == 3){
+				elseif($query_num == 3){
 					echo " AND <b>" . $key2 . "</b> {" . $type2 ."} AND <b>" . $key3 . "</b> {" . $type3 . "}";
 				}
 			?>
     </div>
 	
+	<div id="errmsg"></div>
+	
 	<?php if($num_records <= 0) echo "<div>"; else echo "<div id='threed'>"; ?>
-	<p style="text-align: center; margin-top: 0; margin-bottom: 0">
+	<p>
 		<canvas id='chtPos' width='590' height='590'>
 			Your browser does not support the HTML5 canvas tag.
 		</canvas>
@@ -508,7 +521,7 @@ $go2_pgstr = get_go2_pgstr($selectid, $num_pages, $curr_pageid);
 	</div>
 	
 	<?php if($num_records <= 0) echo "<div>"; else echo "<div id='result'>"; ?>
-    <div id="main">
+    <div>
 		<!--<div id="chart_div" align="center" style="width: 1000px; height: 650px;"></div>-->
 		<div id="expandList">
 		<?php
@@ -517,21 +530,20 @@ $go2_pgstr = get_go2_pgstr($selectid, $num_pages, $curr_pageid);
 		echo $expandable_content_list;
 		?>
 		</div>
-		<div style="font-family: Lato, Courier New; font-weight: bold; text-align: center;">
+		<div style="font-family: Arial, Courier New; font-size: 9pt; font-weight: bold; text-align: center;">
 		<?php if($num_records <= 0) ; else echo $go2_pgstr; ?> </div>
     </div>
 	</div>
-	</div>
 	
-	<div id="div_line" style="height: 2;"></div>
+	<div id="div_line" style="height: 1;"></div>
 	<div class="footer"
-		style="font-family: Open Sans, Lato, Courier New;
-		font-size: 10pt;
+		style="font-family: Arial, Open Sans, Lato, Courier New;
+		font-size: 9pt;
 		text-align: center;">
-			Designed by Daqing Yun &copy; 2014 &middot;
+			All Rights Reserved &copy; 2014-2017 &middot;
 			<a href="http://www.memphis.edu/binf/">Bioinformatics</a> &middot;
 			<a href="http://www.memphis.edu/">University of Memphis</a> &middot;
 			<a href="mailto:rhomayon@memphis.edu;sujoyroy@memphis.edu;dyun@memphis.edu;">Contact</a>
 	</div>
-  </body>
+</body>
 </html>
