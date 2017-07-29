@@ -3,13 +3,15 @@ error_reporting(0);
 /**
  * Constants.php
  *
- * This file is intended to group all constants to
- * make it easier for the site administrator to tweak
- * the login script.
+ * This file is intended to provide all constants to make it easier for the
+ * site administrator to modify the login script.
  * 
- * Daqing Yun @Bioinformatics, UM
- * Email: dyun@memphis.edu
- * Last Updated: Feb 7, 2013
+ * Daqing Yun <daqingyun@gmail.com>
+ *
+ * July 29, 2017
+ * 	Add username and password for local xampp
+ * 	Add username and password for binf1
+ * Last Updated: July 29, 2017
  *
  */
 
@@ -27,10 +29,17 @@ define("BASE_URL", "http://" . $hostname . "/tremel/");
  * to the MySQL database. Make sure the information is
  * correct.
  */
+ /* use the following credential for local xampp */
 define("DB_SERVER", "localhost");
 define("DB_USER", "root");
 define("DB_PASS", "");
 define("DB_NAME", "tremel");
+
+/* use the following credential for UM machine */
+// define("DB_SERVER", "localhost");
+// define("DB_USER", "tremel");
+// define("DB_PASS", "projtremel");
+// define("DB_NAME", "tremel");
 
 /**
  * Database Table Constants - these constants
