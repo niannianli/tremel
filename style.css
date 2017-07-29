@@ -1,44 +1,300 @@
 body {
   	/*background-image: url(./img/background_color.gif);*/
   	/*background-image: url(./img/toptexture.png);*/
-  	/*background-image: url(./img/retreat2012.jpg);*/
+  	/*background-image: url(./img/Ryan_Schroeder.jpg);*/
   	color: black;
-  	height: 95%;
+  	height: 100%;
   	/*font-family: Arial, Lucida Sans Unicode, Lucida Sans, Helvetica, sans-serif;*/
-  	font-family: 'Lato', Times, Courier New;
+  	font-family: Arial, Times, Courier New;
   	font-size:12pt;
   	margin-top: 0;
   	margin-bottom: 0;
   	/*text-align:center;*/
 }
 
-select{
-	font-family: Lato, Times;
-	font-size:12pt;
-	width:80px;
-	height: 28;
-	margin-left: 10;
-	-webkit-text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-	-moz-text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-	text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+#tremelhdr{
+  min-width: 20em;
+  max-width: 35em;
+  /*padding: 10, 10, 10, 10;*/
+  padding: 0 0 10 0;
+  height: auto;
+  color: black;
+  /*text-align: center;*/
+  /*display: block;*/
+  /*box-shadow: 0 0 20px #555;*/
+  border-radius: 4px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  /*min-height: 100%;
+  height: auto;*/
+  /*-webkit-box-shadow: 0 0 10px #555;*/
+}
+
+#tremelhdr_font{
+	font-family: Georgia, Arial, Times;
+	/*color: #666;*/
+	color: black;
+	font-size: 15pt;
+	text-align: center;
+	-webkit-text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+	-moz-text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+	text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+#navbar {
+  padding: 7px 1px 7px 1px;
+  font-family: Georgia, Arial, Times, Courier New;
+  font-size:12pt;
+  height: auto;
+  text-align: center;
+  min-width: 20em;
+  max-width: 35em;
+  margin: auto auto auto auto;
+  color: black;
+  display: block;
+  box-shadow: 0 0 10px #555;
+  border-radius: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  -webkit-box-shadow: 0 0 2px #555;
+}
+
+#navbar a {
+  padding: 0px 1em 0px 1em;
+  color: black;
+  /*font-weight: bold;*/
+  text-decoration: none;
+}
+
+#searchbar {
+  padding: 2px 1px 0px 1px;
+  font-family: Arial, Times, Courier New;
+  font-size:12pt;
+  height: auto;
+  text-align: center;
+  min-width: 20em;
+  max-width: 35em;
+  margin: auto auto auto auto;
+  color: black;
+  /*display: block;
+  box-shadow: 0 0 10px #555;
+  border-radius: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  -webkit-box-shadow: 0 0 2px #555;*/
+}
+
+#searchbar_table {
+	margin: auto;
+	width: auto;
+	text-align: center;
+	/*padding: 0em 0em 0em 2em;*/
+	/*margin-top: 5;
+	float:center;
+	-webkit-text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+	-moz-text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+	text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+	color: black;*/
+}
+
+#td_add_hide {
+	padding: 1px 5px 0px 5px;
+	text-align: center;
+	width: auto;
+	/*height: 1em;*/
+}
+
+#tr_add_hide {
+	padding: 10px 0px 0px 0px;
+	text-align: center;
+	width: auto;
+	/*height: 1em;*/
+}
+
+#td_search_input {
+	text-align: left;
+	margin: auto;
+	width: auto;
+	font-family: Arial, Times;
+  	font-size:12pt;
+	/*font-weight: bold;*/
+}
+
+.input_text {
+	padding: 4px 1px 3px 1px;
+	text-align: left;
+	margin: auto;
+	width: 50%;
+	font-family: Arial, Times;
+  	font-size:12pt;
+	/*font-weight: bold;*/
+}
+select {
+	padding: 4px 15px 4px 20px;
+	margin: auto;
+	width: auto;
+	font-family: Arial, Times;
+  	font-size:12pt;
+	/*font-weight: bold;*/
+}
+
+.submit {
+  padding: 3px 20px 3px 20px;
+  margin: auto;
+  height: auto;
+  font-family: Arial, Times, Courier New;
+  font-size:12pt;
+  /*font-weight: bold;*/
+}
+
+#td_help_hover {
+	padding: 0px 5px 0px 5px;
+	margin: auto;
+    height: auto;
+}
+
+#content {
+  min-height: 0%;
+  height: auto;
+}
+
+#content.firstpage {
+  min-height: 78%;
+}
+
+#div_line{
+  background-color: gray;
+  width: 100%;
+  margin-bottom: 5em;
+  text-align: center;
+  display: block;
+  box-shadow: 0 0 0px #555;
+  border-radius: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  -webkit-box-shadow: 0 0 1px #555;
+}
+
+#main {
+  /*min-width: 20em;
+  max-width: 50em;
+  padding: 0;
+  margin: auto auto auto auto;
+  color: black;
+  text-align: center;
+  display: block;*/
+  box-shadow: 0 0 20px #555;
+  border-radius: 4px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -2px;
+  margin-bottom: 0px;
+  -webkit-box-shadow: 0 0 15px #555;
+}
+
+
+#threed {
+  min-width: 20em;
+  max-width: 35em;
+  /*padding: 10, 10, 10, 10;*/
+  height: auto;
+  color: black;
+  text-align: center;
+  /*border: 2px solid gray;*/
+  border-radius: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  /*margin-top: 10px;
+  margin-bottom: 10px;*/
+  -webkit-box-shadow: 0 0 2px #555;
+}
+
+
+#errmsg {
+	font-family: Arial, Times;
+	font-size:10pt;
+	text-align: center;
+	color: black;
+	-webkit-text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+	-moz-text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+	text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
 	color: black;
 }
 
-input{
-	font-family: Lato, Times; 
-	font-size:12pt; 
-	width:200;
-	height: 28;
-	margin-left: 10;
-	margin-top: 5;
-	margin-bottom: 5;
-	-webkit-text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-	-moz-text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-	text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+#hint {
+	font-family: Arial, Times;
+	font-size:10pt;
+	text-align: center;
 	color: black;
+	margin-top: 10pt;
+	margin-bottom: 10pt;
+	-webkit-text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+	-moz-text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+	text-shadow: 1px 1px 2px rgba(0,0,0,0.2);"
 }
 
-label {
+#result {
+  min-width: 20em;
+  max-width: 35em;
+  /*padding: 10, 10, 10, 10;*/
+  height: auto;
+  color: black;
+  text-align: center;
+  /*border: 2px solid gray;*/
+  border-radius: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  /*margin-top: 10px;
+  margin-bottom: 10px;*/
+  -webkit-box-shadow: 0 0 2px #555;
+}
+
+#main {
+  /*box-shadow: 0 0 20px #555;
+  border-radius: 2px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -2px;
+  margin-bottom: 0px;
+  -webkit-box-shadow: 0 0 5px #555;*/
+}
+
+#accordion{
+	word-break:break-all; 
+	width:auto; 
+	overflow:auto;
+}
+
+p{
+  font-family: Arial, 'Lato', Times, Trebuchet MS, Arial;
+  font-size: 12pt;
+  /*text-align: justify;*/
+  word-break:break-all;
+  width:auto;
+  overflow:auto;
+}
+
+div.content {
+	width: 100%;
+	overflow: scroll;
+	overflow-x: hidden;
+	height: 100px;
+}
+
+.main_table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+/*label {
    font-family: 'Lato', Times;
    font-size:12pt;
    font-style: regular;
@@ -61,82 +317,13 @@ b.cap{
   	font-size: 25pt;
 }
 
-#fontselect{
-	font-family: Lato, Times, Arial; 
-	/*color: #666;*/
-	color: black;
-	font-size: 20pt;
-	-webkit-text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-	-moz-text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-	text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-}
-
-#search{
-  width: 100%;
-  height: auto;
-  text-align: center;
-  /*border: 2px solid black;*/
-  display: block;
-  box-shadow: 0 0 25px #555;
-  border-radius: 4px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 10;
-  margin-bottom: 10;
-  -webkit-box-shadow: 0 0 15px #555;
-}
-
-#result{
-  min-width: 20em;
-  max-width: 50em;
-  padding: 10, 10, 10, 10;
-  height: auto;
-  color: black;
-  text-align: center;
-  border: 2px solid gray;
-  /*display: block;*/
-  /*box-shadow: 0 0 20px #555;*/
-  border-radius: 4px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  /*min-height: 100%;
-  height: auto;*/
-  -webkit-box-shadow: 0 0 10px #555;
-}
-
-#div_line{
-  text-align: center;
-  background-color: gray;
-  width: 100%;
-  padding: 0;
-  margin: auto auto auto auto;
-  text-align: center;
-  display: block;
-  box-shadow: 0 0 4px #555;
-  border-radius: 4px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  -webkit-box-shadow: 0 0 10px #555;
-}
-
 h1 {
   font-family: 'Lato', Times, Trebuchet MS, Arial;
   font-size: 12pt;
   text-align: left;
 }
 
-p {
-  font-family: 'Lato', Times, Trebuchet MS, Arial;
-  font-size: 12pt;
-  text-align: justify;
-  word-break:break-all;
-  width:auto;
-  overflow:auto;
-}
+
 
 ul {
   margin-top: -2;
@@ -174,119 +361,28 @@ h2 {
   font-size: 12pt;
 }
 
-#content {
-  min-height: 0%;
-  height: auto;
-  /*padding: 0;
-  margin: auto auto auto auto;
-  color: black;
-  text-align: center;
-  display: block;
-  box-shadow: 0 0 10px #555;
-  border-radius: 4px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  -webkit-box-shadow: 0 0 10px #555;*/
-}
-
-#content.firstpage {
-  min-height: 70%;
-  height: auto;
-  /*padding: 0;
-  margin: auto auto auto auto;
-  color: black;
-  text-align: center;
-  display: block;
-  box-shadow: 0 0 10px #555;
-  border-radius: 4px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  -webkit-box-shadow: 0 0 10px #555;*/
-}
-
-#threed {
-  min-width: 20em;
-  max-width: 35em;
-  padding: 0;
-  margin: auto auto auto auto;
-  color: black;
-  text-align: center;
-  border: 2px solid gray;
-  display: block;
-  box-shadow: 0 0 2px #555;
-  border-radius: 4px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 15px;
-  margin-bottom: 10px;
-  -webkit-box-shadow: 0 0 10px #555;
-}
-
 #content-ie {
-  width: 70em; /* Until min- and max-width are fixed in IE. */
+  width: 70em;
   min-width: 40em;
   max-width: 70em;
   padding: 0;
-  /*border: 2px solid black;*/
   margin: auto auto auto auto;
   color: black;
   background-color: rgb(240,240,240);
   text-align: center;
 }
 
-#main {
-  /*min-width: 20em;
-  max-width: 50em;
-  padding: 0;
-  margin: auto auto auto auto;
-  color: black;
-  text-align: center;
-  display: block;*/
-  box-shadow: 0 0 20px #555;
-  border-radius: 4px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: -2px;
-  margin-bottom: 0px;
-  -webkit-box-shadow: 0 0 15px #555;
-}
+
 
 #titlebar {
   margin: 0;
   border-top: 0px;
   border-right: 0px;
   border-left: 0px;
-  /*border-bottom: 2px solid black;*/
   padding: 1em 1em 1em 3em;
   color: rgb(0,73,143);
-  /*background-color: rgb(197,217,241);*/
 }
 
-#navbar {
-  padding: 2px 1px 2px 1px;
-  font-family: 'Lato', Times, Courier New;
-  font-size:12pt;
-  height: auto;
-  text-align: center;
-  /*background-image: url(./img/background_color.png);*/
-  /*background-color: rgb(197,217,241);*/
-  min-width: 20em;
-  max-width: 50em;
-  margin: auto auto auto auto;
-  color: black;
-  display: block;
-  box-shadow: 0 0 10px #555;
-  border-radius: 4px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  -webkit-box-shadow: 0 0 10px #555;
-}
 
 #welcome{ 
    width:auto;  
@@ -296,37 +392,6 @@ h2 {
    top:45%;  
    margin:-100px 0 0 -150px;
    text-align:center;
-}
-
-#tremelhdr{
-  /*min-width: 20em;
-  max-width: 50em;*/
-  padding: 10, 10, 10, 10;
-  height: auto;
-  color: black;
-  /*text-align: center;*/
-  /*display: block;*/
-  /*box-shadow: 0 0 20px #555;*/
-  border-radius: 4px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  /*min-height: 100%;
-  height: auto;*/
-  /*-webkit-box-shadow: 0 0 10px #555;*/
-}
-
-#expandList {
-  /*min-width: 100%;
-  max-width: 100%;
-  text-align: center;
-  margin: 0;
-  border: 0;
-  padding: 1em 1em 0em 0em;
-  word-break:break-all;
-  width:100%;
-  overflow:auto;*/
 }
 
 img.shadow{
@@ -342,7 +407,6 @@ img.shadow{
 
 #header {
   margin: 0;
-  /*border-top: 2px solid black;*/
   border-right: 0px;
   border-left: 0px;
   border-bottom: 0px;
@@ -351,7 +415,6 @@ img.shadow{
   background-color: rgb(0,73,143);
   text-align: left;
   font-size: 0.85em;
-  /*background-image: url(background-purple.png);*/
 }
 
 #clustrmaps-widget{
@@ -363,29 +426,11 @@ img.shadow{
 	word-break:break-all; 
 	width:auto; 
 	overflow:auto;}
-	
-#accordion{
-	word-break:break-all; 
-	width:auto; 
-	overflow:auto;}
 
-.footer{
-	height: 1em;
-}
+
 
 div.all {
 	width: 80%;
 	clear: right;
 }
-div.content {
-	width: 100%;
-	overflow: scroll;  /*???????*/
-	overflow-x: hidden; /*???????*/
-	height: 150px;
-}
-.main_table {
-	width: 100%;
-	border-collapse: collapse;  
-	/*table-layout:fixed;*/
-}
-		
+*/		
