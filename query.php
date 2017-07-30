@@ -407,6 +407,21 @@ $go2_pgstr = get_go2_pgstr($selectid, $num_pages, $curr_pageid);
 			);
 		}
 	</script>
+	<!-- Piwik code for localhost/tremel
+	<script type="text/javascript">
+		var _paq = _paq || [];
+		/* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+		_paq.push(['trackPageView']);
+		_paq.push(['enableLinkTracking']);
+		(function() {
+			var u="//localhost/piwik/piwik/";
+			_paq.push(['setTrackerUrl', u+'piwik.php']);
+			_paq.push(['setSiteId', '1']);
+			var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+			g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+		})();
+	</script>
+	End Piwik Code for localhost/tremel -->
 </head>
   
 <body onload="showScat3DCht();">
