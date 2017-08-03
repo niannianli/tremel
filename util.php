@@ -5,8 +5,9 @@
  * Daqing Yun @ CS <dyun@memphis.edu>
  * 
  * Created on: Apr 25, 2013
- * Last Updated: Aug 26, 2014
+ * Last Updated: Aug 03, 2017
  * 
+ * Highlight search term, tf, and genes
  * 
  * Copyright (c) 2013-2014 All Rights Reserved
  * Bioinformatics Program, The University of Memphis
@@ -103,7 +104,7 @@ function get_go2_pgstr($q, $total_page, $curr_page)
 //		$q:
 // Return value:
 //		The constructed content string.
-function get_main_content_result_str($page, $page_size, $total_records, $array, $q)
+function get_main_content_result_str($page, $page_size, $total_records, $array, $q, $key1, $type1, $key2, $type2, $key3, $type3)
 {
 	// load the gene ID numbers into $table which will be used to construct
 	// the link of each gene at http://www.ncbi.nlm.nih.gov/gene/xxxxxx
@@ -185,24 +186,47 @@ function get_main_content_result_str($page, $page_size, $total_records, $array, 
 		$tf_count = count($tf_array);
 		
 		// construct gene content string
-		for ($ii = 0; $ii < ($gene_count-1); $ii = $ii+1)
-		{
+		for ($ii = 0; $ii < ($gene_count-1); $ii = $ii+1) {
 		    $jj = $ii + 1;
-			$genestr = $genestr .
-			"<tr style='font-family: Arial, Courier New; font-size:10pt;'>
+			if ($key1 != "" and strcmp($type1, "gene") == 0 and strcmp(strtolower($gene_array[$ii]), strtolower($key1)) == 0) {
+				$genestr = $genestr .
+				"<tr style='font-family: Arial, Courier New; font-size:10pt;'>
 					<td style='width:10em;'>" . $jj . "</td>
 					<td style='width:10em;'>" . $gene_score_array[$ii] . "</td>
 					<td style='width:auto;'><a data-toggle='tooltip' data-placement='right' title='Click symbol to reach Entrez Gene' style='color:blue;' href='http://www.ncbi.nlm.nih.gov/gene/"
-						. $table[strtolower($gene_array[$ii])] . "' target='_blank'>" . $gene_array[$ii] . "</a></td>
-			 </tr>";
+						. $table[strtolower($gene_array[$ii])] . "' target='_blank'><span style='background-color: orange;'>" . $gene_array[$ii] . "</span></a></td>
+				</tr>";
+			} else if ($key2 != "" and strcmp($type2, "gene") == 0 and strcmp(strtolower($gene_array[$ii]), strtolower($key2)) == 0) {
+				$genestr = $genestr .
+				"<tr style='font-family: Arial, Courier New; font-size:10pt;'>
+					<td style='width:10em;'>" . $jj . "</td>
+					<td style='width:10em;'>" . $gene_score_array[$ii] . "</td>
+					<td style='width:auto;'><a data-toggle='tooltip' data-placement='right' title='Click symbol to reach Entrez Gene' style='color:blue;' href='http://www.ncbi.nlm.nih.gov/gene/"
+						. $table[strtolower($gene_array[$ii])] . "' target='_blank'><span style='background-color: orange;'>" . $gene_array[$ii] . "</span></a></td>
+				</tr>";
+			} else if ($key3 != "" and strcmp($type3, "gene") == 0 and strcmp(strtolower($gene_array[$ii]), strtolower($key3)) == 0) {
+				$genestr = $genestr .
+				"<tr style='font-family: Arial, Courier New; font-size:10pt;'>
+					<td style='width:10em;'>" . $jj . "</td>
+					<td style='width:10em;'>" . $gene_score_array[$ii] . "</td>
+					<td style='width:auto;'><a data-toggle='tooltip' data-placement='right' title='Click symbol to reach Entrez Gene' style='color:blue;' href='http://www.ncbi.nlm.nih.gov/gene/"
+						. $table[strtolower($gene_array[$ii])] . "' target='_blank'><span style='background-color: orange;'>" . $gene_array[$ii] . "</span></a></td>
+				</tr>";
+			} else {
+				$genestr = $genestr .
+				"<tr style='font-family: Arial, Courier New; font-size:10pt;'>
+						<td style='width:10em;'>" . $jj . "</td>
+						<td style='width:10em;'>" . $gene_score_array[$ii] . "</td>
+						<td style='width:auto;'><a data-toggle='tooltip' data-placement='right' title='Click symbol to reach Entrez Gene' style='color:blue;' href='http://www.ncbi.nlm.nih.gov/gene/"
+							. $table[strtolower($gene_array[$ii])] . "' target='_blank'>" . $gene_array[$ii] . "</a></td>
+				</tr>";
+			}
 		}
 		
 		// because in our database we have an extra "," which is caused by the format issue
 		// so if there is one found that means no records are found
-		if($go_count >= 2)
-		{
-			for ($ii = 0; $ii < ($go_count-1); $ii = $ii+1)
-			{
+		if($go_count >= 2) {
+			for ($ii = 0; $ii < ($go_count-1); $ii = $ii+1) {
 				$jj = $ii + 1;
 				$gostr = $gostr .
 				"<tr style='font-family: Arial, Lato, Courier New; font-size:10pt;'>
@@ -211,20 +235,16 @@ function get_main_content_result_str($page, $page_size, $total_records, $array, 
 						<td style='width:auto;'>" . $go_array[$ii] . "</td>
 				 </tr>";
 			}
-		}
-		else
-		{
+		} else{
 			$gostr = 
-			"<tr style='font-family: Arial, Lato, Courier New; font-size:10pt;'>
-					<td>No enrichments found.</td>
-					<td></td><td></td>
-			 </tr>";
+				"<tr style='font-family: Arial, Lato, Courier New; font-size:10pt;'>
+						<td>No enrichments found.</td>
+						<td></td><td></td>
+				</tr>";
 		}
 		
-		if($kegg_count >= 2)
-		{
-			for ($ii = 0; $ii < ($kegg_count-1); $ii = $ii+1)
-			{
+		if($kegg_count >= 2) {
+			for ($ii = 0; $ii < ($kegg_count-1); $ii = $ii+1) {
 				$jj = $ii + 1;
 				$keggstr = $keggstr .
 				"<tr style='font-family: Arial, Lato, Courier New; font-size:10pt;'>
@@ -233,9 +253,7 @@ function get_main_content_result_str($page, $page_size, $total_records, $array, 
 						<td style='width:auto;'>" . $kegg_array[$ii] . "</td>
 				 </tr>";
 			}
-		}
-		else
-		{
+		} else {
 			$keggstr =
 			"<tr style='font-family: Arial, Lato, Courier New; font-size:9pt;'>
 					<td>No enrichments found.</td>
@@ -243,16 +261,72 @@ function get_main_content_result_str($page, $page_size, $total_records, $array, 
 					<td></td>
 			 </tr>";
 		}
-		for ($ii = 0; $ii < ($tf_count-1); $ii = $ii+1)
-		{
+		
+		// construct tf content string
+		for ($ii = 0; $ii < ($tf_count-1); $ii = $ii+1) {
 		    $jj = $ii + 1;
-			$tfstr = $tfstr .
-			"<tr style='font-family: Arial, Lato, Courier New; font-size:10pt;'>
-					<td style='width:10em;'>" . $jj . "</td>
-					<td style='width:10em;'>" . $tf_score_array[$ii] . "</td>
-					<td style='width:auto;'><a data-toggle='tooltip' data-placement='right' title='Click symbol to reach Entrez Gene' style='color:blue;' href='http://www.ncbi.nlm.nih.gov/gene/"
-						. $table[strtolower($tf_array[$ii])] . "' target='_blank'>" . $tf_array[$ii] . "</a></td>
-			 </tr>";
+			if ($key1 != "" and strcmp($type1, "TF") == 0 and strcmp(strtolower($tf_array[$ii]), strtolower($key1)) == 0) {
+				$tfstr = $tfstr .
+				"<tr style='font-family: Arial, Lato, Courier New; font-size:10pt;'>
+						<td style='width:10em;'>" . $jj . "</td>
+						<td style='width:10em;'>" . $tf_score_array[$ii] . "</td>
+						<td style='width:auto;'><a data-toggle='tooltip' data-placement='right' title='Click symbol to reach Entrez Gene' style='color:blue;' href='http://www.ncbi.nlm.nih.gov/gene/"
+							. $table[strtolower($tf_array[$ii])] . "' target='_blank'><span style='background-color: yellow;'>" . $tf_array[$ii] . "</span></a></td>
+				</tr>";
+			} else if ($key2 != "" and strcmp($type2, "TF") == 0 and strcmp(strtolower($tf_array[$ii]), strtolower($key2)) == 0) {
+				$tfstr = $tfstr .
+				"<tr style='font-family: Arial, Lato, Courier New; font-size:10pt;'>
+						<td style='width:10em;'>" . $jj . "</td>
+						<td style='width:10em;'>" . $tf_score_array[$ii] . "</td>
+						<td style='width:auto;'><a data-toggle='tooltip' data-placement='right' title='Click symbol to reach Entrez Gene' style='color:blue;' href='http://www.ncbi.nlm.nih.gov/gene/"
+							. $table[strtolower($tf_array[$ii])] . "' target='_blank'><span style='background-color: yellow;'>" . $tf_array[$ii] . "</span></a></td>
+				</tr>";
+			} else if ($key3 != "" and strcmp($type3, "TF") == 0 and strcmp(strtolower($tf_array[$ii]), strtolower($key3)) == 0) {
+				$tfstr = $tfstr .
+				"<tr style='font-family: Arial, Lato, Courier New; font-size:10pt;'>
+						<td style='width:10em;'>" . $jj . "</td>
+						<td style='width:10em;'>" . $tf_score_array[$ii] . "</td>
+						<td style='width:auto;'><a data-toggle='tooltip' data-placement='right' title='Click symbol to reach Entrez Gene' style='color:blue;' href='http://www.ncbi.nlm.nih.gov/gene/"
+							. $table[strtolower($tf_array[$ii])] . "' target='_blank'><span style='background-color: yellow;'>" . $tf_array[$ii] . "</span></a></td>
+				</tr>";
+			} else {
+				$tfstr = $tfstr .
+				"<tr style='font-family: Arial, Lato, Courier New; font-size:10pt;'>
+						<td style='width:10em;'>" . $jj . "</td>
+						<td style='width:10em;'>" . $tf_score_array[$ii] . "</td>
+						<td style='width:auto;'><a data-toggle='tooltip' data-placement='right' title='Click symbol to reach Entrez Gene' style='color:blue;' href='http://www.ncbi.nlm.nih.gov/gene/"
+							. $table[strtolower($tf_array[$ii])] . "' target='_blank'>" . $tf_array[$ii] . "</a></td>
+				</tr>";
+			}
+		}
+		
+		// construct term content string
+		//echo $term_array;
+		//echo $type1 . " "; echo $type2. " "; echo $type3. " "; exit;
+		$term_array_with_highlight = "";
+		$term_array = explode(', ', $term_array);
+		//echo count($term_array);
+		//echo $term_array[1];
+		for ($ii = 0; $ii < count($term_array)-1; $ii = $ii+1) {
+			if ($key1 != "" and strcmp($type1, "term") == 0 and strcmp(strtolower($term_array[$ii]), strtolower($key1)) == 0) {
+				$term_array_with_highlight = $term_array_with_highlight . "<span style='background-color: red;'>" . $term_array[$ii] . "</span>, ";
+			} else if ($key2 != "" and strcmp($type2, "term") == 0 and strcmp(strtolower($term_array[$ii]), strtolower($key2)) == 0) {
+				$term_array_with_highlight = $term_array_with_highlight . "<span style='background-color: red;'>" . $term_array[$ii] . "</span>, ";
+			} else if ($key3 != "" and strcmp($type3, "term") == 0 and strcmp(strtolower($term_array[$ii]), strtolower($key3)) == 0) {
+				$term_array_with_highlight = $term_array_with_highlight . "<span style='background-color: red;'>" . $term_array[$ii] . "</span>, ";
+			} else {
+				$term_array_with_highlight = $term_array_with_highlight . $term_array[$ii] . ", ";
+			}
+		}
+		// handle the last one with appending the comma
+		if ($key1 != "" and strcmp($type1, "term") == 0 and strcmp(strtolower($term_array[$ii]), strtolower($key1)) == 0) {
+			$term_array_with_highlight = $term_array_with_highlight . "<span style='background-color: red;'>" . $term_array[count($term_array)-1];
+		} else if ($key2 != "" and strcmp($type2, "term") == 0 and strcmp(strtolower($term_array[$ii]), strtolower($key2)) == 0) {
+			$term_array_with_highlight = $term_array_with_highlight . "<span style='background-color: red;'>" . $term_array[count($term_array)-1];
+		} else if ($key3 != "" and strcmp($type3, "term") == 0 and strcmp(strtolower($term_array[$ii]), strtolower($key3)) == 0) {
+			$term_array_with_highlight = $term_array_with_highlight . "<span style='background-color: red;'>" . $term_array[count($term_array)-1];
+		} else {
+			$term_array_with_highlight = $term_array_with_highlight . $term_array[count($term_array)-1];
 		}
 		
 		$contentstr = $contentstr .
@@ -296,7 +370,7 @@ function get_main_content_result_str($page, $page_size, $total_records, $array, 
 							<td rowspan='1' colspan='3'><b>Terms</b></td>
 					</tr>
 					<tr style='font-family: Arial, Lato, Courier New; font-size:10pt; width: 100%; text-wrap: normal; white-space:normal;'>
-							<td rowspan='1'; colspan='3'>" . $term_array . "</td>
+							<td rowspan='1'; colspan='3'>" . $term_array_with_highlight . "</td>
 					</tr>
 			</table>			
 			<table class='main_table'>
