@@ -2,16 +2,17 @@
 /*************************************************************************************
  * query.php - query results showing page
  * 
- * Functionality:
+ * Functionalities:
  * 		1. Get the keywords from the form,
  * 		2. Perform the search,
  * 		3. Render the results in a 3D chart.
+ *      4. Hinting usage & help pop-up.
  * 
  * Author:
- * 		Daqing Yun <dyun@memphis.edu> @ CS
+ * 		Daqing Yun <daqingyun@gmail.com>
  *
  * Created: Apr 25, 2013
- * Last updated: Aug 25, 2014
+ * Last updated: Aug 03, 2017
  * 
  * Change log:
  * 		Dec 28, 2013:
@@ -52,9 +53,14 @@
  *          By using a session, the performance (responding time) is
  *          significantly improved.
  *
+ *	    Aug 03, 2017
+ *			Please refer to ./doc/Help_file.pptx, ./doc/TREMEL_Help_rh.docx,
+ * 			and ./doc/TREMEL_Help_revised.docx.
+ *			These changes are made mainly for the FBIOE paper of TREMEL.
+ *
  *      Detailed change history can be found at ./doc directory.
  *
- * Copyright (c) 2013-2014 All Rights Reserved
+ * Copyright (c) 2013-2017 All Rights Reserved
  * Bioinformatics Program, The University of Memphis
  * 
  *************************************************************************************/
@@ -587,7 +593,7 @@ $go2_pgstr = get_go2_pgstr($selectid, $num_pages, $curr_pageid);
 		<div id="expandList">
 		<?php
 		$cpy_result_array = $raw_result_array;
-		$expandable_content_list = get_main_content_result_str($pageid, $page_size, $num_records, $cpy_result_array, $mark);
+		$expandable_content_list = get_main_content_result_str($pageid, $page_size, $num_records, $cpy_result_array, $mark, $key1, $type1, $key2, $type2, $key3, $type3);
 		echo $expandable_content_list;
 		?>
 		</div>
