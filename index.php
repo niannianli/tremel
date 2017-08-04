@@ -236,7 +236,7 @@ setcookie("cookie[searchType3]", "", time()-3600);
 	
 	<div id="div_line" style="height: 1;"></div>
 	<div class="footer"
-		style="font-family: Arial, Open Sans, Lato, Courier New;
+		style="font-family: Arial, Times;
 		font-size: 9pt;
 		text-align: center;">
 			All Rights Reserved &copy; 2014-2017 &middot;
