@@ -8,6 +8,7 @@
  * Last Updated: Aug 03, 2017
  * 
  * Highlight search term, tf, and genes
+ * Add counts of entities into the title bars in the expandable panel
  * 
  * Copyright (c) 2013-2014 All Rights Reserved
  * Bioinformatics Program, The University of Memphis
@@ -229,7 +230,7 @@ function get_main_content_result_str($page, $page_size, $total_records, $array, 
 			for ($ii = 0; $ii < ($go_count-1); $ii = $ii+1) {
 				$jj = $ii + 1;
 				$gostr = $gostr .
-				"<tr style='font-family: Arial, Lato, Courier New; font-size:10pt;'>
+				"<tr style='font-family: Arial, Courier New; font-size:10pt;'>
 						<td style='width:6em;'>" . $jj . "</td>
 						<td style='width:6em;'>" . $go_score_array[$ii] . "</td>
 						<td style='width:auto;'>" . $go_array[$ii] . "</td>
@@ -237,7 +238,7 @@ function get_main_content_result_str($page, $page_size, $total_records, $array, 
 			}
 		} else{
 			$gostr = 
-				"<tr style='font-family: Arial, Lato, Courier New; font-size:10pt;'>
+				"<tr style='font-family: Arial, Courier New; font-size:10pt;'>
 						<td>No enrichments found.</td>
 						<td></td><td></td>
 				</tr>";
@@ -247,7 +248,7 @@ function get_main_content_result_str($page, $page_size, $total_records, $array, 
 			for ($ii = 0; $ii < ($kegg_count-1); $ii = $ii+1) {
 				$jj = $ii + 1;
 				$keggstr = $keggstr .
-				"<tr style='font-family: Arial, Lato, Courier New; font-size:10pt;'>
+				"<tr style='font-family: Arial, Courier New; font-size:10pt;'>
 						<td style='width:6em;'>" . $jj . "</td>
 						<td style='width:6em;'>" . $kegg_score_array[$ii] . "</td>
 						<td style='width:auto;'>" . $kegg_array[$ii] . "</td>
@@ -255,7 +256,7 @@ function get_main_content_result_str($page, $page_size, $total_records, $array, 
 			}
 		} else {
 			$keggstr =
-			"<tr style='font-family: Arial, Lato, Courier New; font-size:9pt;'>
+			"<tr style='font-family: Arial, Courier New; font-size:9pt;'>
 					<td>No enrichments found.</td>
 					<td></td>
 					<td></td>
@@ -267,7 +268,7 @@ function get_main_content_result_str($page, $page_size, $total_records, $array, 
 		    $jj = $ii + 1;
 			if ($key1 != "" and strcmp($type1, "TF") == 0 and strcmp(strtolower($tf_array[$ii]), strtolower($key1)) == 0) {
 				$tfstr = $tfstr .
-				"<tr style='font-family: Arial, Lato, Courier New; font-size:10pt;'>
+				"<tr style='font-family: Arial, Courier New; font-size:10pt;'>
 						<td style='width:10em;'>" . $jj . "</td>
 						<td style='width:10em;'>" . $tf_score_array[$ii] . "</td>
 						<td style='width:auto;'><a data-toggle='tooltip' data-placement='right' title='Click symbol to reach Entrez Gene' style='color:blue;' href='http://www.ncbi.nlm.nih.gov/gene/"
@@ -275,7 +276,7 @@ function get_main_content_result_str($page, $page_size, $total_records, $array, 
 				</tr>";
 			} else if ($key2 != "" and strcmp($type2, "TF") == 0 and strcmp(strtolower($tf_array[$ii]), strtolower($key2)) == 0) {
 				$tfstr = $tfstr .
-				"<tr style='font-family: Arial, Lato, Courier New; font-size:10pt;'>
+				"<tr style='font-family: Arial, Courier New; font-size:10pt;'>
 						<td style='width:10em;'>" . $jj . "</td>
 						<td style='width:10em;'>" . $tf_score_array[$ii] . "</td>
 						<td style='width:auto;'><a data-toggle='tooltip' data-placement='right' title='Click symbol to reach Entrez Gene' style='color:blue;' href='http://www.ncbi.nlm.nih.gov/gene/"
@@ -283,7 +284,7 @@ function get_main_content_result_str($page, $page_size, $total_records, $array, 
 				</tr>";
 			} else if ($key3 != "" and strcmp($type3, "TF") == 0 and strcmp(strtolower($tf_array[$ii]), strtolower($key3)) == 0) {
 				$tfstr = $tfstr .
-				"<tr style='font-family: Arial, Lato, Courier New; font-size:10pt;'>
+				"<tr style='font-family: Arial, Courier New; font-size:10pt;'>
 						<td style='width:10em;'>" . $jj . "</td>
 						<td style='width:10em;'>" . $tf_score_array[$ii] . "</td>
 						<td style='width:auto;'><a data-toggle='tooltip' data-placement='right' title='Click symbol to reach Entrez Gene' style='color:blue;' href='http://www.ncbi.nlm.nih.gov/gene/"
@@ -291,7 +292,7 @@ function get_main_content_result_str($page, $page_size, $total_records, $array, 
 				</tr>";
 			} else {
 				$tfstr = $tfstr .
-				"<tr style='font-family: Arial, Lato, Courier New; font-size:10pt;'>
+				"<tr style='font-family: Arial, Courier New; font-size:10pt;'>
 						<td style='width:10em;'>" . $jj . "</td>
 						<td style='width:10em;'>" . $tf_score_array[$ii] . "</td>
 						<td style='width:auto;'><a data-toggle='tooltip' data-placement='right' title='Click symbol to reach Entrez Gene' style='color:blue;' href='http://www.ncbi.nlm.nih.gov/gene/"
@@ -339,8 +340,8 @@ function get_main_content_result_str($page, $page_size, $total_records, $array, 
 		"<div>			
 			<table class='main_table'>
 					<thead>
-			              <tr style='font-family: Georgia, Arial, Times; font-size:10pt; background-color:rgb(197,217,241); text-align:center'>
-								<td colspan='3'><b>Genes</b></td>
+			              <tr style='font-family: Arial, Times; font-size:10pt; background-color:rgb(197,217,241); text-align:center'>
+								<td colspan='3'><b>Genes (" . ($gene_count-1) . ")</b></td>
 						  </tr>
 					      <tr style='font-family: Arial, Times; font-size:10pt;'>
 								<td style='width:10em;'><u>Rank</u></td>
@@ -355,10 +356,10 @@ function get_main_content_result_str($page, $page_size, $total_records, $array, 
 				</table>
 			</div>			
 			<table style='width: 100%;'>					
-					<tr style='font-family: Georgia, Arial, Lato, Times; font-size:10pt; background-color:rgb(197,217,241); text-align:center'>
-							<td colspan='3'><b>Transcription Factors</b></td>
+					<tr style='font-family: Arial, Times; font-size:10pt; background-color:rgb(197,217,241); text-align:center'>
+							<td colspan='3'><b>Transcription Factors (" . ($tf_count-1) . ")</b></td>
 					</tr>
-					<tr style='font-family: Arial, Lato, Times; font-size:10pt;'>
+					<tr style='font-family: Arial, Times; font-size:10pt;'>
 							<td style='width:10em;'><u>Rank</u></td>
 							<td style='width:10em;'><u>Score</u></td>
 							<td style='width:auto;'><u>Symbol</u></td>
@@ -366,21 +367,21 @@ function get_main_content_result_str($page, $page_size, $total_records, $array, 
 					" . $tfstr . "
 			</table>			
 			<table style='width: 100%; table-layout: fixed;'>					
-					<tr style='font-family: Georgia, Arial, Lato, Times; font-size:10pt; background-color:rgb(197,217,241); text-align:center;'>
-							<td rowspan='1' colspan='3'><b>Terms</b></td>
+					<tr style='font-family: Arial, Times; font-size:10pt; background-color:rgb(197,217,241); text-align:center;'>
+							<td rowspan='1' colspan='3'><b>Terms (" . (count($term_array)) . ")</b></td>
 					</tr>
-					<tr style='font-family: Arial, Lato, Courier New; font-size:10pt; width: 100%; text-wrap: normal; white-space:normal;'>
+					<tr style='font-family: Arial, Times; font-size:10pt; width: 100%; text-wrap: normal; white-space:normal;'>
 							<td rowspan='1'; colspan='3'>" . $term_array_with_highlight . "</td>
 					</tr>
 			</table>			
 			<table class='main_table'>
 					<thead>
-			              <tr style='font-family: Georgia, Arial, Lato, Times; font-size:10pt; background-color:rgb(255,204,153); text-align:center'>
-									<td colspan='3'><b>Enriched GO Categories (# of categories)</b></td>
+			              <tr style='font-family: Arial, Times; font-size:10pt; background-color:rgb(255,204,153); text-align:center'>
+									<td colspan='3'><b>Enriched GO Categories (" . ($go_count-1) .")</b></td>
 						  </tr>";
 						  if($go_count >= 2)
 						  	$contentstr = $contentstr . 
-						  	"<tr style='font-family: Arial, Lato, Times; font-size:10pt;'>
+						  	"<tr style='font-family: Arial, Times; font-size:10pt;'>
 						  			<td style='width:6em;'><u>Rank</u></td>
 						  			<td style='width:6em;'><u>p-value</u></td>
 						  			<td style='width:auto'><u>Category</u></td>
@@ -397,12 +398,12 @@ function get_main_content_result_str($page, $page_size, $total_records, $array, 
 			
 			<table class='main_table'>
 					<thead>
-			              <tr style='font-family: Georgia, Arial, Lato, Times; font-size:10pt; background-color:rgb(255,204,153); text-align:center'>
-							<td colspan='3'><b>Enriched KEGG Pathways (# of pathways)</b></td>
+			              <tr style='font-family: Arial, Times; font-size:10pt; background-color:rgb(255,204,153); text-align:center'>
+							<td colspan='3'><b>Enriched KEGG Pathways (". ($kegg_count-1) .")</b></td>
 						  </tr>";
 					      if($kegg_count >= 2)
 							$contentstr = $contentstr . 
-					      	"<tr style='font-family: Arial, Lato, Times; font-size:10pt;'>
+					      	"<tr style='font-family: Arial, Times; font-size:10pt;'>
 					      			<td style='width:6em;'><u>Rank</u></td>
 					      			<td style='width:6em;'><u>p-value</u></td>
 					      			<td style='width:auto;'><u>Pathway</u></td>
