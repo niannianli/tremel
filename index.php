@@ -80,7 +80,23 @@ setcookie("cookie[searchType3]", "", time()-3600);
 			g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
 		})();
 	</script>
-	End Piwik Code for localhost/tremel -->
+	End Piwik code for localhost/tremel -->
+	<!-- Piwik code for tremel on binf1 -->
+	<script type="text/javascript">
+	var _paq = _paq || [];
+	_paq.push(["setDomains", ["*.binf1.memphis.edu/tremel"]]);
+	_paq.push(['trackPageView']);
+	_paq.push(['enableLinkTracking']);
+	(function() {
+		var u="//binf1.memphis.edu/piwik/";
+		_paq.push(['setTrackerUrl', u+'piwik.php']);
+		_paq.push(['setSiteId', '1']);
+		var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+		g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+	})();
+	</script>
+	<noscript><p><img src="//binf1.memphis.edu/piwik/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+	<!-- End Piwik code for tremel on binf1 -->
 </head>
 <body>
 	<div style="height: 1em;"></div>

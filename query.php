@@ -428,6 +428,22 @@ $go2_pgstr = get_go2_pgstr($selectid, $num_pages, $curr_pageid);
 		})();
 	</script>
 	End Piwik Code for localhost/tremel -->
+	<!-- Piwik code for tremel on binf1 -->
+	<script type="text/javascript">
+	var _paq = _paq || [];
+	_paq.push(["setDomains", ["*.binf1.memphis.edu/tremel"]]);
+	_paq.push(['trackPageView']);
+	_paq.push(['enableLinkTracking']);
+	(function() {
+		var u="//binf1.memphis.edu/piwik/";
+		_paq.push(['setTrackerUrl', u+'piwik.php']);
+		_paq.push(['setSiteId', '1']);
+		var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+		g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+	})();
+	</script>
+	<noscript><p><img src="//binf1.memphis.edu/piwik/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+	<!-- End Piwik code for tremel on binf1 -->
 </head>
   
 <body onload="showScat3DCht();">
